@@ -9,6 +9,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController nameEditingController = TextEditingController();
+  TextEditingController ageEditingController = TextEditingController();
+  TextEditingController descriptionEditingController = TextEditingController();
+
+  create() {
+    print('Create');
+  }
+
+  read() {
+    print('Read');
+  }
+
+  update() {
+    print('Update');
+  }
+
+  delete() {
+    print('Delete');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             TextField(
-              controller: nameEditingController,
+              controller: descriptionEditingController,
               decoration: const InputDecoration(
                   hintText: 'Description', border: OutlineInputBorder()),
             ),
@@ -36,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             TextField(
-              controller: nameEditingController,
+              controller: ageEditingController,
               decoration: const InputDecoration(
                   hintText: 'Price', border: OutlineInputBorder()),
             ),
@@ -49,27 +68,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                  onPressed: () {},
+                  onPressed: () {
+                    create();
+                  },
                   child: const Text('Create'),
                 ),
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.green)),
-                  onPressed: () {},
+                  onPressed: () {
+                    read();
+                  },
                   child: const Text("Read"),
                 ),
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(Colors.amberAccent)),
-                  onPressed: () {},
+                  onPressed: () {
+                    update();
+                  },
                   child: const Text('Update'),
                 ),
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(Colors.blueAccent)),
-                  onPressed: () {},
+                  onPressed: () {
+                    delete();
+                  },
                   child: const Text('Delete'),
                 ),
               ],
