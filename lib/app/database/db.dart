@@ -1,4 +1,3 @@
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -33,7 +32,13 @@ class DatabaseHelper {
     return await db.query('my_table');
   }
 
-  static Future<int> deleteData()async{
+  static Future<int> deleteData(int id) async {
+    final db = await _opendatabase();
+    return await db.delete('my_table', where: 'id=?', whereArgs: [id]);
+  }
 
+  static Future<int> updateData(int id, Map<String, dynamic> data) async {
+    final db = await _opendatabase();
+    return await db.update('my_table', data, where: 'id=?', whereArgs: [id]);
   }
 }
