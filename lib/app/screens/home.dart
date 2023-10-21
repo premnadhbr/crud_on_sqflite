@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:sqflite_new_crud/app/database/db.dart';
+import 'package:sqflite_new_crud/app/screens/data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,23 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController nameEditingController = TextEditingController();
   TextEditingController ageEditingController = TextEditingController();
-  TextEditingController descriptionEditingController = TextEditingController();
-
-  create() {
-    print('Create');
-  }
-
-  read() {
-    print('Read');
-  }
-
-  update() {
-    print('Update');
-  }
-
-  delete() {
-    print('Delete');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            TextField(
-              controller: descriptionEditingController,
-              decoration: const InputDecoration(
-                  hintText: 'Description', border: OutlineInputBorder()),
-            ),
             const SizedBox(
               height: 10,
             ),
@@ -69,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.red)),
                   onPressed: () {
-                    create();
+                    DatabaseHelper.insertUser(nameEditingController.text,
+                        int.parse(ageEditingController.text));
                   },
                   child: const Text('Create'),
                 ),
@@ -77,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.green)),
                   onPressed: () {
-                    read();
+                    DatabaseHelper.getdata();
                   },
                   child: const Text("Read"),
                 ),
@@ -85,22 +67,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(Colors.amberAccent)),
-                  onPressed: () {
-                    update();
-                  },
+                  onPressed: () {},
                   child: const Text('Update'),
                 ),
                 ElevatedButton(
                   style: const ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll(Colors.blueAccent)),
-                  onPressed: () {
-                    delete();
-                  },
+                  onPressed: () {},
                   child: const Text('Delete'),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>const SecondScreen(),
+                      ));
+                },
+                child: const Text('details'))
           ],
         ),
       ),
